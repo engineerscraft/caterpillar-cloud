@@ -4,12 +4,24 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppComponent } from './app.component';
+import { LoginComponent } from './login/login.component';
+import { RouterModule, Routes } from '@angular/router';
+import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
+
+const appRoutes: Routes = [
+  { path: '', component: LoginComponent }
+];
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    LoginComponent
   ],
   imports: [
+    RouterModule.forRoot(
+      appRoutes
+    ),
+    AngularFontAwesomeModule,
     BrowserModule,
     FormsModule,
     HttpModule,
