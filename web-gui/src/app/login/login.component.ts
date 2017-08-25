@@ -27,6 +27,17 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.flags.isProcessingInProgress = true;
-    this.auth.login(this.router, this.formGroup.value);
+    this.auth.login(this.formGroup.value, 
+      (res) => {
+        this.flags.isProcessingInProgress = false;
+      }, 
+      (err) => {
+        this.flags.isProcessingInProgress = false;
+      }, 
+      (userAttributes, requiredAttributes) => {
+        this.flags.isProcessingInProgress = false;
+        this.router.navigate(['profileCreation']);
+      }
+    );
   }
 }

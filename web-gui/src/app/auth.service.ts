@@ -2,26 +2,16 @@ import { Injectable } from '@angular/core';
 import { environment } from '../environments/environment';
 import * as AWSCognito from 'amazon-cognito-identity-js';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Rx';
 
 @Injectable()
 export class AuthService {
 
   private userPool = new AWSCognito.CognitoUserPool(environment.poolData);
 
-  private newPasswordRequired = {
-    isPasswordRequired: false
-  };
-
-  private response = {
-    succesfulAuthentication: false,
-    newPasswordRequired: false
-  };
-
-  private cognitoUser;
-
   constructor() { }
 
-  login(router: Router, credentials: Object) {
+  login(credentials: Object, successCallback, errorCallback, newPasswordCallback) {
 
     let authenticationData = {
       Username: credentials['username'],
@@ -32,35 +22,24 @@ export class AuthService {
       Username: credentials['username'],
       Pool: this.userPool
     };
-    
+
     userData.Username = credentials['username'];
-    this.cognitoUser = new AWSCognito.CognitoUser(userData);
+    let cognitoUser = new AWSCognito.CognitoUser(userData);
     let authenticationDetails = new AWSCognito.AuthenticationDetails(authenticationData);
-    this.cognitoUser.authenticateUser(authenticationDetails, {
+    cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: function (result) {
-        console.log('access token + ' + result.getAccessToken().getJwtToken());
-        /*Use the idToken for Logins Map when Federating User Pools with Cognito
-        Identity or when passing through an Authorization Header to an API Gateway Authorizer*/
-        console.log('idToken + ' + result);
-        this.response.succesfulAuthentication = true;
-        return this.response;
+        successCallback(result);
       },
       onFailure: function (err) {
-        console.log(err);
-        return this.response;
+        errorCallback(err.message);
       },
       newPasswordRequired: function (userAttributes, requiredAttributes) {
-        this.newPasswordRequired.isPasswordRequired = true;
-        this.newPasswordRequired['userAttributes'] = userAttributes;
-        this.newPasswordRequired['requiredAttributes'] = requiredAttributes;
-        console.log(userAttributes);
-        console.log(requiredAttributes);
-        router.navigate(['profileCreation']);
+        newPasswordCallback(userAttributes, requiredAttributes);
       }
     });
   }
 
-  saveAttributes(newPassword, attributesData) {
+  /*saveAttributes(newPassword, attributesData) {
     this.cognitoUser.completeNewPasswordChallenge(newPassword, attributesData, this);
-  }
+  }*/
 }
