@@ -1,8 +1,7 @@
-<div class="heroimage">
-</div>
+<app-heroimage></app-heroimage>
 
 <div class="full-screen">
-  <form method="post" class="h-100 align-items-center d-flex">
+  <form method="post" class="h-100 align-items-center d-flex" (ngSubmit)="login()">
     <fieldset class="mx-auto col-xl-4 col-lg-4 col-md-6 col-sm-8 col-xs-12 login-panel login-card py-4 px-2 px-sm-4">
       <div class="row mb-4">
         <div class="mx-auto col-lg-12 col-md-12 col-sm-12 col-xs-12">
@@ -15,23 +14,23 @@
       <div class="row mb-4">
         <div class="mx-auto col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="input-group input-group-lg">
-            <span class="input-group-addon" id="username"><fa name="user"></fa></span>
-            <input type="text" class="form-control" placeholder="Username" aria-describedby="username">
+            <span class="input-group-addon" id="username"><fa name="user" class="fa-fw"></fa></span>
+            <input type="text" class="form-control" placeholder="Username" aria-describedby="username" required="true">
           </div>
         </div>
       </div>
       <div class="row mb-4">
         <div class="mx-auto col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="input-group input-group-lg">
-            <span class="input-group-addon" id="password"><fa name="lock"></fa></span>
-            <input type="text" class="form-control" placeholder="Password" type="password" aria-describedby="password">
+            <span class="input-group-addon" id="password"><fa name="lock" class="fa-fw"></fa></span>
+            <input type="text" class="form-control" placeholder="Password" type="password" aria-describedby="password" required="true">
           </div>
         </div>
       </div>
       <div class="row mb-4">
         <div class="mx-auto col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="input-group input-group-lg">
-            <button type="button" class="btn btn-info btn-block btn-lg" (ngSubmit)="login()">Login</button>
+            <button type="submit" class="btn btn-info btn-block btn-lg">Login</button>
           </div>
         </div>
       </div>

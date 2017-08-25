@@ -93,6 +93,12 @@
       "resolved": "https://registry.npmjs.org/@ngtools/webpack/-/webpack-1.3.0.tgz",
       "dev": true
     },
+    "@types/aws-sdk": {
+      "version": "2.7.0",
+      "from": "@types/aws-sdk@latest",
+      "resolved": "https://registry.npmjs.org/@types/aws-sdk/-/aws-sdk-2.7.0.tgz",
+      "dev": true
+    },
     "@types/jasmine": {
       "version": "2.5.38",
       "from": "@types/jasmine@2.5.38",

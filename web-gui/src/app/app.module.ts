@@ -7,15 +7,21 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awesome';
+import { AuthService } from './auth.service';
+import { NewPasswordComponent } from './new-password/new-password.component';
+import { HeroimageComponent } from './heroimage/heroimage.component';
 
 const appRoutes: Routes = [
-  { path: '', component: LoginComponent }
+  { path: '', component: LoginComponent },
+  { path: 'profileCreation', component: NewPasswordComponent }
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
+    NewPasswordComponent,
+    HeroimageComponent
   ],
   imports: [
     RouterModule.forRoot(
@@ -27,7 +33,7 @@ const appRoutes: Routes = [
     HttpModule,
     NgbModule.forRoot()
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
