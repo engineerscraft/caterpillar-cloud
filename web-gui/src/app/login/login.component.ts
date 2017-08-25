@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
     isProcessingInProgress: false
   };
 
+  private error;
+
   constructor(private formBuilder: FormBuilder, private auth: AuthService, private router: Router) { }
 
   ngOnInit() {
@@ -33,6 +35,12 @@ export class LoginComponent implements OnInit {
       }, 
       (err) => {
         this.flags.isProcessingInProgress = false;
+        this.error = err;
+        setTimeout(() => {
+          if (this.error) {
+            this.error = undefined;
+          }
+        }, 3000);
       }, 
       (userAttributes, requiredAttributes) => {
         this.flags.isProcessingInProgress = false;

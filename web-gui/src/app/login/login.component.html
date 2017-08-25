@@ -11,6 +11,11 @@
           </h1>
         </div>
       </div>
+      <div *ngIf=error class="row mb-2 mx-1">
+        <div class="alert alert-danger mx-auto col-lg-12 col-md-12 col-sm-12 col-xs-12">
+          {{error}}
+        </div>
+      </div>
       <div class="row mb-4">
         <div class="mx-auto col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="input-group input-group-lg">
@@ -23,7 +28,8 @@
         <div class="mx-auto col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="input-group input-group-lg">
             <span class="input-group-addon" id="password"><fa name="lock" class="fa-fw"></fa></span>
-            <input type="text" formControlName="password" class="form-control" placeholder="Password" type="password" aria-describedby="password" required="true">
+            <input type="text" formControlName="password" class="form-control" placeholder="Password" type="password" aria-describedby="password"
+              required="true">
           </div>
         </div>
       </div>
