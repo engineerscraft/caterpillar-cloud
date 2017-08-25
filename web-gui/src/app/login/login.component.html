@@ -1,11 +1,11 @@
 <app-heroimage></app-heroimage>
 
 <div class="full-screen">
-  <form method="post" class="h-100 align-items-center d-flex" (ngSubmit)="login()">
-    <fieldset class="mx-auto col-xl-4 col-lg-4 col-md-6 col-sm-8 col-xs-12 login-panel login-card py-4 px-2 px-sm-4">
+  <form [formGroup]="formGroup" method="post" class="h-100 align-items-center d-flex" (ngSubmit)="login()">
+    <fieldset [disabled]="flags.isProcessingInProgress" class="mx-auto col-xl-4 col-lg-4 col-md-6 col-sm-8 col-xs-12 login-card py-4 px-2 px-sm-4">
       <div class="row mb-4">
         <div class="mx-auto col-lg-12 col-md-12 col-sm-12 col-xs-12">
-          <h1 class="text-center header-color">
+          <h1 class="text-center login-header-color">
             Caterpillar
             <small class="text-muted secondary-text-color">Cloud</small>
           </h1>
@@ -15,7 +15,7 @@
         <div class="mx-auto col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="input-group input-group-lg">
             <span class="input-group-addon" id="username"><fa name="user" class="fa-fw"></fa></span>
-            <input type="text" class="form-control" placeholder="Username" aria-describedby="username" required="true">
+            <input type="text" formControlName="username" class="form-control" placeholder="Username" aria-describedby="username" required="true">
           </div>
         </div>
       </div>
@@ -23,14 +23,14 @@
         <div class="mx-auto col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="input-group input-group-lg">
             <span class="input-group-addon" id="password"><fa name="lock" class="fa-fw"></fa></span>
-            <input type="text" class="form-control" placeholder="Password" type="password" aria-describedby="password" required="true">
+            <input type="text" formControlName="password" class="form-control" placeholder="Password" type="password" aria-describedby="password" required="true">
           </div>
         </div>
       </div>
       <div class="row mb-4">
         <div class="mx-auto col-lg-12 col-md-12 col-sm-12 col-xs-12">
           <div class="input-group input-group-lg">
-            <button type="submit" class="btn btn-info btn-block btn-lg">Login</button>
+            <button type="submit" class="btn btn-primary btn-block btn-lg"><i *ngIf="flags.isProcessingInProgress" class="fa fa-refresh fa-spin"></i> Login</button>
           </div>
         </div>
       </div>

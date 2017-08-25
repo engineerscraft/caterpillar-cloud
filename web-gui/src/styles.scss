@@ -1,5 +1,5 @@
 
-$blue:    #4ca1af;
+$blue: #4ca1af;
 
 $btn-focus-box-outline: 1;
 $custom-btn-focus-box-shadow-width: 0;
@@ -7,3 +7,7 @@ $custom-btn-focus-box-shadow-width: 0;
 @import "bootstrap/bootstrap";
 @import "bootstrap/bootstrap-grid";
 @import "bootstrap/bootstrap-reboot";
+
+body {
+    background-color: #f3f3f4;
+}

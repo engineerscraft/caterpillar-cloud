@@ -8,21 +8,8 @@ export class AuthService {
 
   private userPool = new AWSCognito.CognitoUserPool(environment.poolData);
 
-  private authenticationData = {
-    Username: 'adminuser',
-    Password: 'AdminUser1*',
-  };
-
   private newPasswordRequired = {
     isPasswordRequired: false
-  };
-
-  private authenticationDetails = new
-    AWSCognito.AuthenticationDetails(this.authenticationData);
-
-  private userData = {
-    Username: 'adminuser',
-    Pool: this.userPool
   };
 
   private response = {
@@ -34,9 +21,22 @@ export class AuthService {
 
   constructor() { }
 
-  login(router: Router) {
-    this.cognitoUser = new AWSCognito.CognitoUser(this.userData);
-    this.cognitoUser.authenticateUser(this.authenticationDetails, {
+  login(router: Router, credentials: Object) {
+
+    let authenticationData = {
+      Username: credentials['username'],
+      Password: credentials['password']
+    };
+
+    let userData = {
+      Username: credentials['username'],
+      Pool: this.userPool
+    };
+    
+    userData.Username = credentials['username'];
+    this.cognitoUser = new AWSCognito.CognitoUser(userData);
+    let authenticationDetails = new AWSCognito.AuthenticationDetails(authenticationData);
+    this.cognitoUser.authenticateUser(authenticationDetails, {
       onSuccess: function (result) {
         console.log('access token + ' + result.getAccessToken().getJwtToken());
         /*Use the idToken for Logins Map when Federating User Pools with Cognito

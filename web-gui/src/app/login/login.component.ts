@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -9,11 +10,23 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private auth: AuthService, private router: Router) { }
+  private formGroup: FormGroup;
 
-  ngOnInit() {  }
+  private flags = {
+    isProcessingInProgress: false
+  };
+
+  constructor(private formBuilder: FormBuilder, private auth: AuthService, private router: Router) { }
+
+  ngOnInit() {
+    this.formGroup = this.formBuilder.group({
+      username: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
 
   login() {
-    this.auth.login(this.router);
+    this.flags.isProcessingInProgress = true;
+    this.auth.login(this.router, this.formGroup.value);
   }
 }

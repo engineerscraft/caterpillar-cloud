@@ -9,6 +9,10 @@ export class NewPasswordComponent implements OnInit {
 
   constructor() { }
 
+  private flags = {
+    isProcessingInProgress: false
+  };
+  
   ngOnInit() {
   }
 
