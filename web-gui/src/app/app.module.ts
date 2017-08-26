@@ -10,10 +10,12 @@ import { AngularFontAwesomeModule } from 'angular-font-awesome/angular-font-awes
 import { AuthService } from './auth.service';
 import { NewPasswordComponent } from './new-password/new-password.component';
 import { HeroimageComponent } from './heroimage/heroimage.component';
+import { LoginMgmtComponent } from './login-mgmt/login-mgmt.component';
+import { AppDashboardComponent } from './app-dashboard/app-dashboard.component';
 
 const appRoutes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'profileCreation', component: NewPasswordComponent }
+  { path: '', component: LoginMgmtComponent },
+  { path: 'appDashboard', component: AppDashboardComponent }
 ];
 
 @NgModule({
@@ -21,7 +23,9 @@ const appRoutes: Routes = [
     AppComponent,
     LoginComponent,
     NewPasswordComponent,
-    HeroimageComponent
+    HeroimageComponent,
+    LoginMgmtComponent,
+    AppDashboardComponent
   ],
   imports: [
     RouterModule.forRoot(

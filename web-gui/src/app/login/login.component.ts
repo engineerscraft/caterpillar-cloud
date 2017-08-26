@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -10,6 +10,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class LoginComponent implements OnInit {
 
+  @Output() newPasswordRequired = new EventEmitter<any>();
+  
   private formGroup: FormGroup;
 
   private flags = {
@@ -32,6 +34,7 @@ export class LoginComponent implements OnInit {
     this.auth.login(this.formGroup.value, 
       (res) => {
         this.flags.isProcessingInProgress = false;
+        this.router.navigate(['appDashboard']);
       }, 
       (err) => {
         this.flags.isProcessingInProgress = false;
@@ -40,11 +43,13 @@ export class LoginComponent implements OnInit {
           if (this.error) {
             this.error = undefined;
           }
-        }, 3000);
+        }, 4000);
       }, 
       (userAttributes, requiredAttributes) => {
-        this.flags.isProcessingInProgress = false;
-        this.router.navigate(['profileCreation']);
+        this.flags.isProcessingInProgress = false
+        this.newPasswordRequired.emit({
+          userAttributes: userAttributes
+        });
       }
     );
   }

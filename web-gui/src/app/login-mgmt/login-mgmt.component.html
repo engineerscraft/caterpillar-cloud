@@ -1,0 +1,5 @@
+<ng-template #loginComponent>
+  <app-login (newPasswordRequired)="newPasswordRequied($event)"></app-login>
+</ng-template>
+
+<app-new-password *ngIf="userAttributes; else loginComponent" [userAttributes]="userAttributes"></app-new-password>
